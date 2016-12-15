@@ -7,15 +7,5 @@ let getList = function() {
 
 };
 
-
-async function getMoviesFromApi() {
-  try {
-    let response = await fetch('https://facebook.github.io/react-native/movies.json');
-    let responseJson = await response.json();
-    return responseJson.movies;
-  } catch(error) {
-    console.error(error);
-  }
-}
-
+// TODO: remove this file
 export {getList}

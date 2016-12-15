@@ -22,5 +22,6 @@ class BeerInfo extends React.Component {
   }
 }
 
+// TODO: remove this file
 
 export default BeerInfo;

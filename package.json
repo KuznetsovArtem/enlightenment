@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "remotedev": "remotedev --hostname=localhost --port=8000",
     "test": "jest",
     "run-andy": "react-native run-android"
   },
@@ -13,7 +14,8 @@
     "react-native-router-flux": "^3.37.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "remote-redux-devtools": "^0.5.7"
   },
   "devDependencies": {
     "babel-jest": "17.0.2",

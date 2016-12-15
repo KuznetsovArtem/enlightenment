@@ -101,3 +101,5 @@ export default class BeerList extends React.Component {
     );
   }
 }
+
+// TODO: remove this file
