@@ -1,36 +1,43 @@
 /**
  * Created by artem on 12/14/16.
  */
-import React, { Component } from 'react';
+import React from 'react';
+import {bindActionCreators} from 'redux';
+import * as actionList  from '../actions/beerList';
+import { connect } from 'react-redux';
 import {
   StyleSheet,
   Text,
   View
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import  BeerList  from '../components/BeerList';
 
-const Home = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome} onPress={() => Actions.details()}>
-        Home Screen
-      </Text>
-    </View>
-  );
-};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F2C57C',
-  },
-  welcome: {
-    fontSize: 30,
-    fontWeight: '900',
-    color: '#1C110A',
-  },
-});
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default Home;
+  render() {
+      const { beerObj, beerActions } = this.props;
+
+      //console.log('beerObj: ', beerObj, BeerList);
+    //drinkerBeerList={beerObj.beerListMine}
+      return (
+          <BeerList
+              beerList={beerObj.beerListMine}
+              isProfileView={true}
+              onPressHandler={beerActions.removeBeerFromMyList}/>
+      )
+  }
+}
+
+export default connect(
+    state => ({
+        beerObj: state.beerList
+    }),
+    (dispatch) => ({
+        beerActions: bindActionCreators(actionList , dispatch)
+    })
+)(Home);

@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {bindActionCreators} from 'redux';
-import * as detailsActions from '../actions/beerDetails';
+import * as actionList  from '../actions/beerList';
 import { connect } from 'react-redux';
 import {
   StyleSheet,
@@ -13,6 +13,7 @@ import {
   Button
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import  BeerList  from '../components/BeerList';
 // TODO: move route actions to redux;
 
 import styles from '../styles/BeerDetails.style';
@@ -23,37 +24,26 @@ class BeerDetails extends React.Component {
   }
 
   render() {
-    const { state, actions } = this.props;
+      const { beerObj, beerActions } = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.h1}>Beer Info</Text>
-        <Text style={styles.h2}>Rate: {state.rate}</Text>
-
-        <View style={styles.buttonsBlock}>
-          <Button
-            onPress={actions.incrementRate}
-            title="Like"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-          <Button
-            onPress={actions.decrementRate}
-            title="Dislike"
-            color="red"
-            accessibilityLabel="Learn more about this purple button"
-          />
+        <View>
+            <BeerList
+                beerList={beerObj.beerListMine}
+                isProfileView={false}
+                onPressHandler={beerActions.addBeerToMyList}
+            />
+            <Button title="Back to your list"
+                    onPress={() => Actions.home()}/>
         </View>
-
-        <Text style={styles.h1} onPress={() => Actions.home()}>Back</Text>
-      </View>
     )
   }
 }
 
-export default connect(state => ({
-    state: state.beerDetails
-  }),
-  (dispatch) => ({
-    actions: bindActionCreators(detailsActions, dispatch)
-  })
+export default connect(
+    state => ({
+        beerObj: state.beerList
+    }),
+    (dispatch) => ({
+        beerActions: bindActionCreators(actionList , dispatch)
+    })
 )(BeerDetails);
